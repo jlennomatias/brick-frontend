@@ -1,1 +1,36 @@
-// app global css in SCSS form
+@import 'quasar.variables.scss'; // Certifique-se de que o caminho esteja correto
+
+body .q-page{
+  background: linear-gradient(135deg, $accent, $tertiary, $secondary, $primary);
+  color: $text-color;
+  font-weight: bold;
+}
+
+.login-container {
+  background-color: rgba(238, 238, 238, 0.4);
+  color: var(--accent);
+  max-width: 500px;
+  width: 100%;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  text-align: center;
+}
+
+.text-title {
+  color: $title-text-color;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.text-value {
+  color: $text-value;
+}
+
+.error-message {
+  background-color: rgba($negative, 0.4);
+  color: $title-text-color;
+  font-weight: bold;
+  font-size: 20px;
+  margin-top: 10px;
+}
