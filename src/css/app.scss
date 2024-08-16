@@ -7,7 +7,7 @@ body .q-page{
 }
 
 .login-container {
-  background-color: rgba(238, 238, 238, 0.4);
+  background-color: rgba(238, 238, 238, 0.9);
   color: var(--accent);
   max-width: 500px;
   width: 100%;
@@ -18,7 +18,7 @@ body .q-page{
 }
 
 .text-title {
-  color: $title-text-color;
+  color: $text-color;
   font-weight: bold;
   font-size: 14px;
 }
@@ -29,7 +29,7 @@ body .q-page{
 
 .error-message {
   background-color: rgba($negative, 0.4);
-  color: $title-text-color;
+  color: $text-color;
   font-weight: bold;
   font-size: 20px;
   margin-top: 10px;

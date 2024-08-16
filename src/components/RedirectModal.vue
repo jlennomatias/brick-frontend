@@ -122,7 +122,7 @@ export default {
   max-width: 400px;
   margin: 0 auto;
   padding: 20px;
-  background-color: rgba(238, 238, 238, 0.9);
+  background-color: rgba(238, 238, 238, 1.0);
   border-radius: 10px;
   border: 1px solid #e6e5ea;
   box-shadow: 0px 4px 10px 0px rgba(15, 33, 43, 0.05);

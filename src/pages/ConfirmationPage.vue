@@ -28,8 +28,8 @@
 
             <div>
               <label>Valor a pagar:</label>
-              <span class="row justify-center payment-amount">{{
-                consentData.consent.payment.amount
+              <span class="row justify-center payment-amount">R$ {{
+                consentData.consent.payment.amount.replace('.', ',')
               }}</span>
             </div>
           </div>

@@ -173,7 +173,10 @@ export default {
     },
 
     cancel() {
-      this.$router.push("/");
+      this.showModal = true
+      setTimeout(function (){
+        window.location.href = 'https://www.finansystech.com.br/'
+      }, 2500)
     },
   },
   mounted() {

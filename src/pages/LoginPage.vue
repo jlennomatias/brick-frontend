@@ -6,26 +6,11 @@
         Faça seu login
       </q-item-label>
 
-      <q-input
-        v-model="cpfCnpj"
-        label="CPF ou CNPJ"
-        outlined
-        maxlength="18"
-        class="login-input"
-      />
+      <q-input v-model="cpfCnpj" label="CPF ou CNPJ" outlined maxlength="18" class="login-input" />
 
-      <q-input
-        v-model="password"
-        label="Senha"
-        outlined
-        :type="showPassword ? 'text' : 'password'"
-        class="login-input"
-      >
+      <q-input v-model="password" label="Senha" outlined :type="showPassword ? 'text' : 'password'" class="login-input">
         <template v-slot:append>
-          <q-icon
-            :name="showPassword ? 'visibility' : 'visibility_off'"
-            @click="togglePasswordVisibility"
-          />
+          <q-icon :name="showPassword ? 'visibility' : 'visibility_off'" @click="togglePasswordVisibility" />
         </template>
       </q-input>
 
@@ -33,19 +18,15 @@
         <q-spinner v-if="loading" color="white" />
       </q-btn>
 
-      <q-btn
-        label="Cancelar"
-        color="negative"
-        flat
-        class="login-button"
-        @click="cancel"
-      >
+      <q-btn label="Cancelar" color="negative" flat class="login-button" @click="cancel">
         <q-spinner v-if="loading" color="white" />
       </q-btn>
       <div class="error-message" v-if="errorMessage">
         Erro: {{ errorMessage }}
       </div>
     </div>
+
+    <RedirectModal v-if="showModal" />
   </q-page>
 </template>
 
