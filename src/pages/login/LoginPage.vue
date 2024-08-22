@@ -1,7 +1,7 @@
 <template>
   <q-page class="login-page">
     <div class="login-container">
-      <q-img src="../assets/img/f-icon.png" class="login-logo" />
+      <q-img src="src/assets/img/f-icon.png" class="login-logo" />
       <q-item-label class="login-title text-title">
         Faça seu login
       </q-item-label>
@@ -21,9 +21,7 @@
       <q-btn label="Cancelar" color="negative" flat class="login-button" @click="cancel">
         <q-spinner v-if="loading" color="white" />
       </q-btn>
-      <div class="error-message" v-if="errorMessage">
-        Erro: {{ errorMessage }}
-      </div>
+      
     </div>
 
     <RedirectModal v-if="showModal" />

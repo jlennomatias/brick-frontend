@@ -29,8 +29,9 @@ body .q-page{
 
 .error-message {
   background-color: rgba($negative, 0.4);
-  color: $text-color;
+  color: $title-text-color;
   font-weight: bold;
   font-size: 20px;
   margin-top: 10px;
+  border-radius: 15px;
 }

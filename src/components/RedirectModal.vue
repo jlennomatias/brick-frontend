@@ -16,7 +16,7 @@
       </div>
       <div class="open-redirect-ifs">
         <div class="if_logo">
-          <img class="if_logo" src="../assets/img/f-icon.png" alt="" />
+          <img class="if_logo" src="src/assets/img/f-icon.png" alt="" />
         </div>
         <div class="arrow-sep">
           <svg

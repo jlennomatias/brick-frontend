@@ -94,8 +94,7 @@
 </template>
 
 <script>
-import axios from "axios";
-import RedirectModal from "../components/RedirectModal.vue";
+import RedirectModal from "../../components/RedirectModal.vue";
 
 export default {
     name: "ConfirmationAutomaticPayment",
@@ -156,7 +155,7 @@ export default {
                 "debtorAccount": this.confirmationData.account[this.selectedAccount],
                 "device": this.deviceInfo,
             }
-            const respostaLogin = await axios.post(`/api/${process.env.CLIENT_ID}/consents/v1/interactions/${this.confirmationData.consentData.interactionId}/consent`, body)
+            // const respostaLogin = await axios.post(`/api/${process.env.CLIENT_ID}/consents/v1/interactions/${this.confirmationData.consentData.interactionId}/consent`, body)
 
             this.loading = false;
             this.showModal = true;
@@ -215,7 +214,6 @@ export default {
 </script>
 
 <style scoped>
-@import url("../assets/css/confirmationStyle.css");
 
 .logo-img {
     width: 50px;

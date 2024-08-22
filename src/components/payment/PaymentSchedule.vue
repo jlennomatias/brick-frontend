@@ -2,14 +2,14 @@
   <div class="col">
     <div v-if="confirmationData.consent.payment?.date">
       <label>Data de Pagamento:</label>
-      <span class="space-left text-value">{{
+      <span class="q-ml-sm text-value">{{
         applyDateFormat(confirmationData.consent.payment.date)
       }}</span>
     </div>
 
     <div v-else-if="confirmationData.consent.payment?.schedule?.single?.date">
       <label>Data de Pagamento:</label>
-      <span class="space-left text-value">{{
+      <span class="q-ml-sm text-value">{{
         applyDateFormat(confirmationData.consent.payment.schedule.single.date)
       }}</span>
     </div>
@@ -18,7 +18,7 @@
       <label class="row justify-center">Pagamento Diário</label>
       <div class="row justify-center">
         <label>Data de Início:</label>
-        <span class="space-left text-value">{{
+        <span class="q-ml-sm text-value">{{
           applyDateFormat(
             confirmationData.consent.payment.schedule.daily.startDate,
           )
@@ -26,7 +26,7 @@
       </div>
       <div class="row justify-center">
         <label>Quantidade:</label>
-        <span class="space-left text-value">{{
+        <span class="q-ml-sm text-value">{{
           confirmationData.consent.payment.schedule.daily.quantity
         }}</span>
       </div>
@@ -36,13 +36,13 @@
       <label class="row justify-center">Pagamento Semanal</label>
       <div class="row justify-center">
         <label>Dia da Semana:</label>
-        <span class="space-left text-value">{{
+        <span class="q-ml-sm text-value">{{
           confirmationData.consent.payment.schedule.weekly.dayOfWeek
         }}</span>
       </div>
       <div class="row justify-center">
         <label>Data de Início:</label>
-        <span class="space-left text-value">{{
+        <span class="q-ml-sm text-value">{{
           applyDateFormat(
             confirmationData.consent.payment.schedule.weekly.startDate,
           )
@@ -50,7 +50,7 @@
       </div>
       <div class="row justify-center">
         <label>Quantidade:</label>
-        <span class="space-left text-value">{{
+        <span class="q-ml-sm text-value">{{
           confirmationData.consent.payment.schedule.weekly.quantity
         }}</span>
       </div>
@@ -60,13 +60,13 @@
       <label class="row justify-center">Pagamento Mensal</label>
       <div class="row justify-center">
         <label>Dia do Mês:</label>
-        <span class="space-left text-value">{{
+        <span class="q-ml-sm text-value">{{
           confirmationData.consent.payment.schedule.monthly.dayOfMonth
         }}</span>
       </div>
       <div class="row justify-center">
         <label>Data de Início:</label>
-        <span class="space-left text-value">{{
+        <span class="q-ml-sm text-value">{{
           applyDateFormat(
             confirmationData.consent.payment.schedule.monthly.startDate,
           )
@@ -74,7 +74,7 @@
       </div>
       <div class="row justify-center">
         <label>Quantidade:</label>
-        <span class="space-left text-value">{{
+        <span class="q-ml-sm text-value">{{
           confirmationData.consent.payment.schedule.monthly.quantity
         }}</span>
       </div>
@@ -87,7 +87,7 @@
       <label class="row justify-center">Pagamento Customizado</label>
       <div class="row justify-center">
         <label>Datas de pagamento:</label>
-        <div class="space-left dates-list">
+        <div class="q-ml-sm dates-list">
           <span class="date-item text-value">
             {{
               confirmationData.consent.payment.schedule.custom.dates.join(" | ")
@@ -95,30 +95,13 @@
           </span>
         </div>
       </div>
-      <!-- <div class="row justify-center">
-        <label>Data de Início:</label>
-        <span class="space-left text-value">{{
-          applyDateFormat(
-            confirmationData.consent.payment.schedule.monthly.startDate,
-          )
-        }}</span>
-      </div> -->
-      <!-- <div class="row justify-center">
-        <label>Informações Adicionais:</label>
-        <div class="text-body2">
-          {{
-            confirmationData.consent.payment.schedule.custom
-              .additionalInformation
-          }}
-        </div>
-      </div> -->
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "ConfirmationPayment",
+  name: "PaymentSchedule",
   props: {
     confirmationData: {
       type: Object,
@@ -134,9 +117,6 @@ export default {
 </script>
 
 <style>
-.space-left {
-  margin-left: 10px;
-}
 
 .dates-list {
   display: block;

@@ -3,9 +3,10 @@ const routes = [
     path: '/',
     component: () => import('layouts/MainLayout.vue'),
     children: [
-      { path: '', component: () => import('src/pages/LoginPage.vue') },
-      { path: 'confirmation', component: () => import('src/pages/ConfirmationPage.vue') },
-      { path: 'teste', component: () => import('src/pages/teste.vue') }
+      { path: '', component: () => import('src/pages/login/LoginPage.vue') },
+      { path: 'confirmation', component: () => import('src/pages/confirmation/ConfirmationPage.vue') },
+      { path: 'teste', component: () => import('src/pages/pagesTestes/redirectComponentPage.vue') },
+      { path: 'comfirmationAutomaticPage', component: () => import('src/pages/pagesTestes/ComfirmationAutomaticPage.vue') }
     ]
   },
 
