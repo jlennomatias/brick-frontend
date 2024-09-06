@@ -1,10 +1,9 @@
 import { api } from "src/boot/axios"; // Importe a instância personalizada do Axios
 
-// Função para criar um consentimento do tipo payment
+// Função para logar o cliente no backend
 export async function authClientLogin(data) {
   try {
-    
-    return { cpfCnpj: "12345678909" };
+    return { document: "12345678909", acessToken: "1234" };
 
     const response = await api.post("/api/auth", data);
     return response.data;
@@ -13,3 +12,4 @@ export async function authClientLogin(data) {
     throw error;
   }
 }
+

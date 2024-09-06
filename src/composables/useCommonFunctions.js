@@ -29,9 +29,9 @@ export function useCommonFunctions() {
     }
   };
 
-  const cancel = () => {
+  const cancel = (url) => {
     setTimeout(() => {
-      window.location.href = "https://www.finansystech.com.br/";
+      window.location.href = url;
     }, 2500);
   };
 

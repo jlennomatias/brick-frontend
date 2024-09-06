@@ -25,6 +25,53 @@
             v-if="kind === 'data'"
             :confirmationData="consentData"
           />
+          <q-item-label class="confirmation-title text-title">
+            Fonte de pagamento
+          </q-item-label>
+          <div
+            v-for="(conta, index) in contas"
+            :key="index"
+            class="content-box"
+          >
+            <div class="row justify-center">
+              <q-radio
+                :id="index"
+                class="checkbox-inline confirmation-radio"
+                v-model="selectedAccount"
+                :val="index"
+                size="24px"
+              />
+              <label class="" :for="index">{{
+                `Ag ${conta.issuer} |
+              ${getAccountTypeLabel(conta.accountType).sigla}
+              ${conta.number}`
+              }}</label>
+            </div>
+            <label class="row justify-center"
+              >Saldo em conta: R$ {{ conta.balance.toFixed(2) }}</label
+            >
+          </div>
+          <q-item-label class="confirmation-title text-title">
+            Forma de pagamento
+          </q-item-label>
+          <div class="content-box">
+            <label class="lh-12">Tipo: </label
+            >{{ consentData?.consent?.payment?.type }}
+          </div>
+          <div class="open-finance-message">
+            <p>
+              Para concluir o pagamento, lhe redirecionaremos devolta para a
+              instituição
+              <span class="stronger-1"
+                >{{ consentData?.consent.organizationName }}
+                <img
+                  :src="consentData?.consent.organizationLogo"
+                  alt="Logo"
+                  class="logo-img"
+              /></span>
+            </p>
+          </div>
+
           <q-btn
             label="Confirmar"
             color="primary"
@@ -51,59 +98,7 @@
   </q-page>
 </template>
 
-<script>
-import ConfirmationPayment from "src/components/payment/ConfirmationPayment.vue";
-import ConfirmationAutomaticPayment from "src/components/automaticPayment/ConfirmationAutomaticPayment.vue";
-import ConfirmationData from "src/components/data/ConfirmationData.vue";
-import RedirectModal from "src/components/RedirectModal.vue";
-import { useCommonFunctions } from "src/composables/useCommonFunctions";
-import { useLoginStore } from "src/stores/loginStore";
-
-export default {
-  components: {
-    RedirectModal,
-    ConfirmationPayment,
-    ConfirmationAutomaticPayment,
-    ConfirmationData,
-  },
-
-  setup() {
-    const { cancel: cancelComposable, getDeviceInfo } = useCommonFunctions();
-
-    const loginStore = useLoginStore();
-    const loginData = loginStore.loginData;
-    const kind =
-      loginData.consentData?.consent?.kind || loginData.consentData?.kind;
-
-    const consentData = loginData.consentData;
-
-    const showModal = false;
-
-    const approve = () => {
-      showModal.value = true;
-      getDeviceInfo();
-      setTimeout(() => {
-        window.location.href = "https://www.finansystech.com.br/";
-      }, 2500);
-    };
-
-    const cancel = () => {
-      showModal.value = true;
-      getDeviceInfo();
-      cancelComposable();
-    };
-
-    return {
-      kind,
-      consentData,
-      showModal,
-      approve,
-      cancel,
-      getDeviceInfo,
-    };
-  },
-};
-</script>
+<script src="./ConfirmationPageScript.js"></script>
 
 <style scoped>
 .info-container {
@@ -125,6 +120,16 @@ export default {
   color: #003b80;
 }
 
+.open-finance-message {
+  margin-top: 16px;
+  font-size: 14px;
+}
+
+.logo-img {
+  height: 24px;
+  margin-left: 8px;
+}
+
 .login-page {
   display: flex;
   justify-content: center;
@@ -138,5 +143,21 @@ export default {
   margin-top: 15px;
   font-size: 18px;
   padding: 12px;
+}
+
+.confirmation-title {
+  font-size: 24px;
+  margin-bottom: 16px;
+}
+
+.content-box {
+  border: 1px solid #003b80;
+  border-radius: 8px;
+  padding: 5px;
+  margin-bottom: 12px;
+}
+
+.checkbox-inline {
+  margin-right: 8px;
 }
 </style>

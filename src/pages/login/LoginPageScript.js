@@ -8,6 +8,7 @@ import { useCommonFunctions } from "src/composables/useCommonFunctions";
 import { holderLoginConsent } from "src/services/holderConsentsService/holderConsentsService";
 import { authClientLogin } from "src/services/auth/authService";
 import { useLoginStore } from "src/stores/loginStore";
+import { useAuthStore } from "src/stores/authStore";
 
 export default {
   name: "LoginPage",
@@ -21,6 +22,7 @@ export default {
     const router = useRouter();
     const route = useRoute(); // Para acessar os parâmetros da URL
     const loginStore = useLoginStore();
+    const authStore = useAuthStore();
 
     // Composables
     const { showError, handleRequestError, cancel, getDeviceInfo } =
@@ -94,7 +96,9 @@ export default {
         loginAttempts.value++;
 
         try {
-          const document = await authClientLogin({ cpfCnpj, password });
+          const {document, acessToken} = await authClientLogin({ cpfCnpj, password });
+          authStore.setAuthToken(acessToken)
+
           const body = {
             accessToken: btoa(document.cpfCnpj),
             device: getDeviceInfo(),

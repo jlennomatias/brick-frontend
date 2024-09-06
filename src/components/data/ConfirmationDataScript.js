@@ -10,7 +10,6 @@ export default {
   },
   setup() {
     const {
-      cancel: cancelComposable,
       getDeviceInfo,
       applyCPFMask,
     } = useCommonFunctions();
@@ -19,7 +18,6 @@ export default {
     const loginData = loginStore.loginData;
     const error = ref(false);
     const selectedAccount = ref(0);
-    const showModal = ref(false);
     const consentData = loginData.consentData;
     const contas = loginData.accountData;
 
@@ -34,20 +32,6 @@ export default {
       );
     };
 
-    const approve = () => {
-      showModal.value = true;
-      getDeviceInfo();
-      setTimeout(() => {
-        window.location.href = "https://www.finansystech.com.br/";
-      }, 2500);
-    };
-
-    const cancel = () => {
-      showModal.value = true;
-      getDeviceInfo();
-      cancelComposable();
-    };
-
     const applyDateFormat = (date) => {
       return date.split("T")[0];
     };
@@ -55,14 +39,11 @@ export default {
     return {
       error,
       selectedAccount,
-      showModal,
       consentData,
       contas,
       applyDateFormat,
       applyCPFMask,
       getAccountTypeLabel,
-      approve,
-      cancel,
       getDeviceInfo,
     };
   },

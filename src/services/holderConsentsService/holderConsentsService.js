@@ -22,6 +22,8 @@ export async function holderLoginConsent(interactionId, data) {
 // Função para criar um consentimento do tipo automatic-payment
 export async function holderApproveConsent(interactionId, data) {
   try {
+
+    return { url: "http://localhost:8081"}
     const response = await api.post(
       `/api/${clientName}/consents/v1/interactions/${interactionId}/consent`,
       data,
@@ -36,6 +38,8 @@ export async function holderApproveConsent(interactionId, data) {
 // Função para criar um consentimento do tipo data
 export async function holderCancelConsent(interactionId, data) {
   try {
+    
+    return { url: "http://localhost:8081"}
     const response = await api.post(
       `/api/${clientName}/consents/v1/interactions/${interactionId}/cancel`,
       data,
