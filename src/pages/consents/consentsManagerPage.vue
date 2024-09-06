@@ -81,6 +81,14 @@ export default {
     });
 
     const setData = (item) => {
+      // Fecha todos os itens primeiro
+      for (const key in expandedItems.value) {
+        expandedItems.value[key] = false;
+      }
+      // Expande o item selecionado
+      expandedItems.value[item] = true;
+
+      // Simula carregamento
       if (!expandedItems.value[item]) {
         isLoading.value[item] = true;
       }
@@ -110,8 +118,8 @@ export default {
 }
 
 .login-container {
-  width: 100%;
-  max-width: 600px;
+  height: 800px;
+  max-height: 100%;
 }
 
 .login-title {

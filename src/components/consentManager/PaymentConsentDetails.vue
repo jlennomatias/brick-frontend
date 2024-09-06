@@ -3,23 +3,43 @@
     <q-spinner v-if="loading" color="primary" />
     <div v-else>
       <p v-if="errorMessage" class="q-mb-md text-negative">{{ errorMessage }}</p>
-      <div v-else>
-        <div v-for="(item, index) in consent" :key="index" class="q-mb-md q-pa-sm bg-grey-2 q-rounded q-shadow-2 row items-center">
-          <div class="col">
-            <div class="q-mb-sm">
-              <label class="text-bold">Creditor: </label> {{ item.creditor.name }}
+      <div v-else class="consent-content">
+        <div
+          v-for="(item, index) in consent"
+          :key="index"
+          class="content-box q-pa-xs row"
+        >
+          <div class="col margin-box">
+            <div class="row">
+              <label class="text-bold small-text">Nome:</label>
+              <span class="small-text">{{ item.creditor.name }}</span>
             </div>
-            <div class="q-mb-sm">
-              <label class="text-bold">Date: </label> {{ item.payment.date }}
+            <div class="row">
+              <label class="text-bold small-text">Date:</label>
+              <span class="small-text">{{ item.payment.date }}</span>
             </div>
-            <div class="q-mb-sm">
-              <label class="text-bold">Amount: R$ </label>
-              {{ parseFloat(item.payment.amount).toFixed(2) }}
+            <div class="row amount-row">
+              <label class="text-bold amount-text">Amount: R$</label>
+              <span class="amount-text">{{ parseFloat(item.payment.amount).toFixed(2) }}</span>
             </div>
           </div>
-          <div class="col-auto">
-            <q-btn @click="revokeConsent(item.id)" color="negative" label="Revogar" size="small" class="q-mb-sm" />
-            <q-btn @click="alterConsent(item.id)" color="primary" label="Alterar" size="small" />
+          <div class="col-auto self-center margin-box button-group ">
+            <q-btn
+              @click="alterConsent(item.id)"
+              color="primary"
+              icon="edit"
+              size="xs"
+              flat
+              dense
+            />
+            <q-btn
+              @click="revokeConsent(item.id)"
+              color="negative"
+              icon="delete"
+              size="xs"
+              flat
+              dense
+            />
           </div>
         </div>
       </div>
@@ -29,7 +49,11 @@
 
 <script>
 import { ref, onMounted, watch } from "vue";
-import { getConsentsPayments, deleteConsentPayment, updateConsentPayment } from "src/services/gestaoConsents/apiGestaoConsentimentoPaymentService.js";
+import {
+  getConsentsPayments,
+  deleteConsentPayment,
+  updateConsentPayment,
+} from "src/services/gestaoConsents/apiGestaoConsentimentoPaymentService.js";
 
 export default {
   props: {
@@ -70,7 +94,8 @@ export default {
         await fetchData(); // Recarregar os dados após revogação
       } catch (error) {
         console.error("Erro ao revogar consentimento:", error);
-        errorMessage.value = "Erro ao revogar o consentimento. Tente novamente.";
+        errorMessage.value =
+          "Erro ao revogar o consentimento. Tente novamente.";
       }
     };
 
@@ -81,7 +106,8 @@ export default {
         console.log("Alterar consentimento com ID:", consentId);
       } catch (error) {
         console.error("Erro ao alterar consentimento:", error);
-        errorMessage.value = "Erro ao alterar o consentimento. Tente novamente.";
+        errorMessage.value =
+          "Erro ao alterar o consentimento. Tente novamente.";
       }
     };
 
@@ -110,15 +136,45 @@ export default {
 .consent-details {
   border: 1px solid #003b80;
   border-radius: 8px;
-  background-color: #f9f9f9;
+  max-width: 800px;
+  margin: 0 auto;
+  overflow: hidden;
 }
 
-.error-message {
+.consent-content {
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+.small-text {
+  font-size: 12px;
+}
+
+.amount-text {
+  font-size: 14px;
   font-weight: bold;
+  color: #003b80;
 }
 
-.payment-info,
-.account-info {
-  margin-top: 8px;
+.q-pa-xs {
+  padding: 8px;
+}
+
+.button-group {
+  display: flex;
+  flex-direction: row;
+  gap: 4px;
+}
+
+.content-box {
+  border: 1px solid #003b80;
+  border-radius: 8px;
+  padding: 4px;
+  margin-bottom: 6px;
+  align-items: flex-start;
+}
+
+.margin-box {
+  margin: 0 9px;
 }
 </style>
