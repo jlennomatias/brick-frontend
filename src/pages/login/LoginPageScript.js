@@ -1,6 +1,6 @@
 import { ref, reactive, watch } from "vue";
 import { useRouter, useRoute } from "vue-router";
-import RedirectModal from "src/components/RedirectModal.vue";
+import RedirectModal from "src/components/dialog/RedirectModal.vue";
 import ConfirmationPayment from "src/components/payment/ConfirmationPayment.vue";
 import ConfirmationAutomaticPayment from "src/components/automaticPayment/ConfirmationAutomaticPayment.vue";
 import ConfirmationData from "src/components/data/ConfirmationData.vue";
@@ -20,7 +20,7 @@ export default {
   },
   setup() {
     const router = useRouter();
-    const route = useRoute(); // Para acessar os parâmetros da URL
+    const route = useRoute();
     const loginStore = useLoginStore();
     const authStore = useAuthStore();
 
@@ -96,8 +96,11 @@ export default {
         loginAttempts.value++;
 
         try {
-          const {document, acessToken} = await authClientLogin({ cpfCnpj, password });
-          authStore.setAuthToken(acessToken)
+          const { document, acessToken } = await authClientLogin({
+            cpfCnpj,
+            password,
+          });
+          authStore.setAuthToken(acessToken);
 
           const body = {
             accessToken: btoa(document.cpfCnpj),
@@ -109,8 +112,8 @@ export default {
             body,
           );
 
-          loginStore.setLoginData(loginData); // Armazene os dados no Pinia
-          goToConfirmation();
+          loginStore.setLoginData(loginData);
+          hasInteractionId();
         } catch (error) {
           handleRequestError(error);
         } finally {
@@ -124,8 +127,14 @@ export default {
       }
     };
 
-    const goToConfirmation = () => {
-      router.push("/confirmation");
+    const hasInteractionId = () => {
+      if (paramsLogin.interactionId) {
+        router.push("/confirmation");
+        console.log("redirecionando para o /confirmationm");
+      } else {
+        console.log("redirecionando para o /");
+        router.push("/");
+      }
     };
 
     return {
@@ -141,7 +150,7 @@ export default {
       togglePasswordVisibility,
       formatCpfCnpj,
       login,
-      goToConfirmation,
+      hasInteractionId,
       showError,
       handleRequestError,
       cancel,

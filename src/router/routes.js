@@ -10,16 +10,10 @@ const routes = [
       {
         path: "confirmation",
         component: () => import("src/pages/confirmation/ConfirmationPage.vue"),
-        meta: {
-          auth: true,
-        },
       },
       {
         path: "consentsManagerPage",
         component: () => import("src/pages/consents/consentsManagerPage.vue"),
-        meta: {
-          auth: true,
-        },
       },
       {
         path: "teste",

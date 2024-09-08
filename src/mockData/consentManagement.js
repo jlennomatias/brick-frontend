@@ -15,7 +15,7 @@ export const consentManageData = [
       type: "PIX",
       date: "2024-08-22",
       currency: "BRL",
-      amount: "1.00",
+      amount: "580.00",
       details: {
         localInstrument: "DICT",
         proxy: "+5519999205983",
@@ -46,20 +46,28 @@ export const consentManageData = [
         date: "2024-08-22T12:55:29.335Z",
         event: "AWAITING_AUTHORISATION",
       },
+      {
+        date: "2024-08-22T12:55:29.335Z",
+        event: "AUTHORISED",
+      },
+      {
+        date: "2024-08-22T12:55:29.335Z",
+        event: "CONSUMED",
+      },
     ],
     journey: [],
     registredClient: true,
-    consentId: "urn:mais:e5d1a9f88fa3e1698ede8f0e",
+    consentId: "urn:mais:c1",
     consentTerm: 0,
     consentTermUnit: "M",
     organizationName: "OTIMO SOCIEDADE DE CREDITO DIRETO S.A.",
-    organizationLogo: "https://authotimoscd.com.br/logo_otimo.svg",
+    organizationLogo: "src/assets/img/f-icon.png",
   },
   {
     creditor: {
       personType: "PESSOA_NATURAL",
       cpfCnpj: "05891771845",
-      name: "AURELIO ARAUJO",
+      name: "Joao Silva",
     },
     debtorAccount: {
       ispb: "30306294",
@@ -71,7 +79,7 @@ export const consentManageData = [
       type: "PIX",
       date: "2024-08-22",
       currency: "BRL",
-      amount: "1.00",
+      amount: "230.00",
       details: {
         localInstrument: "DICT",
         proxy: "+5519999205983",
@@ -119,17 +127,17 @@ export const consentManageData = [
       },
     ],
     registredClient: true,
-    consentId: "urn:mais:cee1c0763c087cfac852fa95",
+    consentId: "urn:mais:c2",
     consentTerm: 0,
     consentTermUnit: "M",
     organizationName: "OTIMO SOCIEDADE DE CREDITO DIRETO S.A.",
-    organizationLogo: "https://authotimoscd.com.br/logo_otimo.svg",
+    organizationLogo: "src/assets/img/f-icon.png",
   },
   {
     creditor: {
       personType: "PESSOA_NATURAL",
       cpfCnpj: "05891771845",
-      name: "AURELIO ARAUJO",
+      name: "Fulano de Tal",
     },
     debtorAccount: {
       ispb: "30306294",
@@ -141,7 +149,7 @@ export const consentManageData = [
       type: "PIX",
       date: "2024-08-22",
       currency: "BRL",
-      amount: "1.00",
+      amount: "92.00",
       details: {
         localInstrument: "DICT",
         proxy: "+5519999205983",
@@ -194,11 +202,11 @@ export const consentManageData = [
       code: "TEMPO_EXPIRADO_AUTORIZACAO",
       detail: "O usuário não confirmou o consentimento e o mesmo expirou",
     },
-    consentId: "urn:mais:9547d67c71465d30dc93a521",
+    consentId: "urn:mais:c3",
     consentTerm: 0,
     consentTermUnit: "M",
     organizationName: "OTIMO SOCIEDADE DE CREDITO DIRETO S.A.",
-    organizationLogo: "https://authotimoscd.com.br/logo_otimo.svg",
+    organizationLogo: "src/assets/img/f-icon.png",
   },
   {
     creditor: {
@@ -247,17 +255,17 @@ export const consentManageData = [
       code: "TEMPO_EXPIRADO_AUTORIZACAO",
       detail: "O usuário não confirmou o consentimento e o mesmo expirou",
     },
-    consentId: "urn:mais:25959b1e962abf9aea3d5312",
+    consentId: "urn:mais:c4",
     consentTerm: 0,
     consentTermUnit: "M",
     organizationName: "Nubank",
-    organizationLogo: "https://nuapp.nubank.com.br/open-banking/logo.svg",
+    organizationLogo: "src/assets/img/f-icon.png",
   },
   {
     creditor: {
       personType: "PESSOA_NATURAL",
       cpfCnpj: "05891771845",
-      name: "AURELIO ARAUJO",
+      name: "Maria Teste",
     },
     debtorAccount: {
       ispb: "30306294",
@@ -269,7 +277,7 @@ export const consentManageData = [
       type: "PIX",
       date: "2024-08-22",
       currency: "BRL",
-      amount: "1.00",
+      amount: "84.00",
       details: {
         localInstrument: "DICT",
         proxy: "+5519999205983",
@@ -308,17 +316,17 @@ export const consentManageData = [
       code: "TEMPO_EXPIRADO_AUTORIZACAO",
       detail: "O usuário não confirmou o consentimento e o mesmo expirou",
     },
-    consentId: "urn:mais:87b813ce4f3bee6a7580655e",
+    consentId: "urn:mais:c5",
     consentTerm: 0,
     consentTermUnit: "M",
     organizationName: "OTIMO SOCIEDADE DE CREDITO DIRETO S.A.",
-    organizationLogo: "https://authotimoscd.com.br/logo_otimo.svg",
+    organizationLogo: "src/assets/img/f-icon.png",
   },
   {
     creditor: {
       personType: "PESSOA_NATURAL",
       cpfCnpj: "05891771845",
-      name: "AURELIO ARAUJO",
+      name: "Priscila Silva",
     },
     debtorAccount: {
       ispb: "30306294",
@@ -330,7 +338,7 @@ export const consentManageData = [
       type: "PIX",
       date: "2024-08-22",
       currency: "BRL",
-      amount: "1.00",
+      amount: "36.00",
       details: {
         localInstrument: "DICT",
         proxy: "+5519999205983",
@@ -364,17 +372,17 @@ export const consentManageData = [
     ],
     journey: [],
     registredClient: true,
-    consentId: "urn:mais:e5d1a9f88fa3e1698ede8f0e",
+    consentId: "urn:mais:c6",
     consentTerm: 0,
     consentTermUnit: "M",
     organizationName: "OTIMO SOCIEDADE DE CREDITO DIRETO S.A.",
-    organizationLogo: "https://authotimoscd.com.br/logo_otimo.svg",
+    organizationLogo: "src/assets/img/f-icon.png",
   },
   {
     creditor: {
       personType: "PESSOA_NATURAL",
       cpfCnpj: "05891771845",
-      name: "AURELIO ARAUJO",
+      name: "Jose Araujo",
     },
     debtorAccount: {
       ispb: "30306294",
@@ -386,7 +394,7 @@ export const consentManageData = [
       type: "PIX",
       date: "2024-08-22",
       currency: "BRL",
-      amount: "1.00",
+      amount: "20.00",
       details: {
         localInstrument: "DICT",
         proxy: "+5519999205983",
@@ -434,17 +442,17 @@ export const consentManageData = [
       },
     ],
     registredClient: true,
-    consentId: "urn:mais:cee1c0763c087cfac852fa95",
+    consentId: "urn:mais:c7",
     consentTerm: 0,
     consentTermUnit: "M",
     organizationName: "OTIMO SOCIEDADE DE CREDITO DIRETO S.A.",
-    organizationLogo: "https://authotimoscd.com.br/logo_otimo.svg",
+    organizationLogo: "src/assets/img/f-icon.png",
   },
   {
     creditor: {
       personType: "PESSOA_NATURAL",
       cpfCnpj: "05891771845",
-      name: "AURELIO ARAUJO",
+      name: "Marta dos Santos",
     },
     debtorAccount: {
       ispb: "30306294",
@@ -456,7 +464,7 @@ export const consentManageData = [
       type: "PIX",
       date: "2024-08-22",
       currency: "BRL",
-      amount: "1.00",
+      amount: "100.00",
       details: {
         localInstrument: "DICT",
         proxy: "+5519999205983",
@@ -509,17 +517,17 @@ export const consentManageData = [
       code: "TEMPO_EXPIRADO_AUTORIZACAO",
       detail: "O usuário não confirmou o consentimento e o mesmo expirou",
     },
-    consentId: "urn:mais:9547d67c71465d30dc93a521",
+    consentId: "urn:mais:c8",
     consentTerm: 0,
     consentTermUnit: "M",
     organizationName: "OTIMO SOCIEDADE DE CREDITO DIRETO S.A.",
-    organizationLogo: "https://authotimoscd.com.br/logo_otimo.svg",
+    organizationLogo: "src/assets/img/f-icon.png",
   },
   {
     creditor: {
       personType: "PESSOA_NATURAL",
       cpfCnpj: "55495141334",
-      name: "Elizabeth Tayler Pessoa Araujo",
+      name: "Sicrano da Silva",
     },
     payment: {
       type: "PIX",
@@ -562,17 +570,17 @@ export const consentManageData = [
       code: "TEMPO_EXPIRADO_AUTORIZACAO",
       detail: "O usuário não confirmou o consentimento e o mesmo expirou",
     },
-    consentId: "urn:mais:25959b1e962abf9aea3d5312",
+    consentId: "urn:mais:c9",
     consentTerm: 0,
     consentTermUnit: "M",
     organizationName: "Nubank",
-    organizationLogo: "https://nuapp.nubank.com.br/open-banking/logo.svg",
+    organizationLogo: "src/assets/img/f-icon.png",
   },
   {
     creditor: {
       personType: "PESSOA_NATURAL",
       cpfCnpj: "05891771845",
-      name: "AURELIO ARAUJO",
+      name: "Jeferson Barros",
     },
     debtorAccount: {
       ispb: "30306294",
@@ -584,7 +592,7 @@ export const consentManageData = [
       type: "PIX",
       date: "2024-08-22",
       currency: "BRL",
-      amount: "1.00",
+      amount: "45.00",
       details: {
         localInstrument: "DICT",
         proxy: "+5519999205983",
@@ -623,10 +631,10 @@ export const consentManageData = [
       code: "TEMPO_EXPIRADO_AUTORIZACAO",
       detail: "O usuário não confirmou o consentimento e o mesmo expirou",
     },
-    consentId: "urn:mais:87b813ce4f3bee6a7580655e",
+    consentId: "urn:mais:c10",
     consentTerm: 0,
     consentTermUnit: "M",
     organizationName: "OTIMO SOCIEDADE DE CREDITO DIRETO S.A.",
-    organizationLogo: "https://authotimoscd.com.br/logo_otimo.svg",
+    organizationLogo: "src/assets/img/f-icon.png",
   },
 ];

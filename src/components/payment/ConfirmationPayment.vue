@@ -9,7 +9,7 @@
 
       <div>
         <label>Valor a pagar:</label>
-        <span class="row justify-center payment-amount"
+        <span class="row justify-center text-stronger-value payment-amount"
           >R$ {{ consentData.consent.payment.amount.replace(".", ",") }}</span
         >
       </div>
@@ -40,18 +40,9 @@
 
 <script src="./ConfirmationPaymentScript.js"></script>
 
-<style scoped>
-
-.content-box {
-  border: 1px solid #003b80;
-  border-radius: 8px;
-  padding: 5px;
-  margin-bottom: 12px;
-}
+<style lang="scss">
 
 .payment-amount {
-  color: #003b80;
-  font-weight: bold;
   font-size: 24px;
 }
 

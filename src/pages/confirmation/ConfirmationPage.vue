@@ -7,7 +7,7 @@
         </div>
         <div class="info-message">
           Para que possamos concluir o pagamento, iremos lhe redirecionar para a
-          instituição <span class="stronger-1">Finansystech</span>
+          instituição <span class="text-stronger-value">Finansystech</span>
         </div>
       </div>
 
@@ -62,7 +62,7 @@
             <p>
               Para concluir o pagamento, lhe redirecionaremos devolta para a
               instituição
-              <span class="stronger-1"
+              <span class="text-stronger-value"
                 >{{ consentData?.consent.organizationName }}
                 <img
                   :src="consentData?.consent.organizationLogo"
@@ -115,11 +115,6 @@
   margin-right: 12px;
 }
 
-.stronger-1 {
-  font-weight: bold;
-  color: #003b80;
-}
-
 .open-finance-message {
   margin-top: 16px;
   font-size: 14px;
@@ -150,14 +145,8 @@
   margin-bottom: 16px;
 }
 
-.content-box {
-  border: 1px solid #003b80;
-  border-radius: 8px;
-  padding: 5px;
-  margin-bottom: 12px;
-}
-
 .checkbox-inline {
   margin-right: 8px;
 }
+
 </style>

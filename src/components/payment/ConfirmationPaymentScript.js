@@ -1,5 +1,5 @@
 import { ref } from "vue";
-import RedirectModal from "src/components/RedirectModal.vue";
+import RedirectModal from "src/components/dialog/RedirectModal.vue";
 import PaymentSchedule from "src/components/payment/PaymentSchedule.vue";
 import { useCommonFunctions } from "src/composables/useCommonFunctions";
 import { useLoginStore } from "src/stores/loginStore";

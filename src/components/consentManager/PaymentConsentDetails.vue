@@ -1,8 +1,10 @@
 <template>
   <div class="consent-details q-pa-md">
-    <q-spinner v-if="loading" color="primary" />
+    <q-spinner v-if="loading || actionLoading" color="primary" />
     <div v-else>
-      <p v-if="errorMessage" class="q-mb-md text-negative">{{ errorMessage }}</p>
+      <p v-if="errorMessage" class="q-mb-md text-negative">
+        {{ errorMessage }}
+      </p>
       <div v-else class="consent-content">
         <div
           v-for="(item, index) in consent"
@@ -11,29 +13,44 @@
         >
           <div class="col margin-box">
             <div class="row">
-              <label class="text-bold small-text">Nome:</label>
-              <span class="small-text">{{ item.creditor.name }}</span>
+              <span class="small-text text-left"
+                >Nome: {{ item.creditor.name }}</span
+              >
             </div>
             <div class="row">
-              <label class="text-bold small-text">Date:</label>
-              <span class="small-text">{{ item.payment.date }}</span>
+              <span class="small-text text-left"
+                >Data: {{ item.payment.date }}</span
+              >
             </div>
             <div class="row amount-row">
-              <label class="text-bold amount-text">Amount: R$</label>
-              <span class="amount-text">{{ parseFloat(item.payment.amount).toFixed(2) }}</span>
+              <span class="text-stronger-value text-left"
+                >Valor: R$
+                {{ parseFloat(item.payment.amount).toFixed(2) }}</span
+              >
             </div>
           </div>
-          <div class="col-auto self-center margin-box button-group ">
+          <div class="col-auto self-center margin-box button-group">
             <q-btn
-              @click="alterConsent(item.id)"
+              @click="viewConsent(item)"
+              color="primary"
+              icon="visibility"
+              size="xs"
+              flat
+              dense
+            />
+
+            <!-- Desabilitado para detentora de conta -->
+            <!-- <q-btn
+              @click="alterConsent(item)"
               color="primary"
               icon="edit"
               size="xs"
               flat
               dense
-            />
+            /> -->
+
             <q-btn
-              @click="revokeConsent(item.id)"
+              @click="openConfirmDialog(item.consentId)"
               color="negative"
               icon="delete"
               size="xs"
@@ -44,18 +61,39 @@
         </div>
       </div>
     </div>
+
+    <ViewConsentDialog
+      :isOpen="isViewDialogOpen"
+      :consentItem="selectedConsent"
+      @update:isOpen="isViewDialogOpen = $event"
+    />
+
+    <AlterConsentDialog
+      :isOpen="isAlterDialogOpen"
+      :consentItem="selectedConsent"
+      @update:isOpen="isAlterDialogOpen = $event"
+    />
+
+    <RevokeConsentDialog
+      :isOpen="isConfirmDialogOpen"
+      @confirm="revokeConsent"
+      @update:isOpen="isConfirmDialogOpen = $event"
+    />
   </div>
 </template>
 
 <script>
-import { ref, onMounted, watch } from "vue";
+import { ref, onMounted } from "vue";
 import {
   getConsentsPayments,
   deleteConsentPayment,
-  updateConsentPayment,
 } from "src/services/gestaoConsents/apiGestaoConsentimentoPaymentService.js";
+import ViewConsentDialog from "src/components/dialog/ViewConsentDialog.vue";
+import AlterConsentDialog from "src/components/dialog/AlterConsentDialog.vue";
+import RevokeConsentDialog from "src/components/dialog/RevokeConsentDialog.vue";
 
 export default {
+  components: { ViewConsentDialog, AlterConsentDialog, RevokeConsentDialog },
   props: {
     type: {
       type: String,
@@ -65,49 +103,61 @@ export default {
   },
   setup(props, { emit }) {
     const consent = ref([]);
-    const loading = ref(props.loading);
     const errorMessage = ref("");
+    const isViewDialogOpen = ref(false);
+    const isAlterDialogOpen = ref(false);
+    const isConfirmDialogOpen = ref(false);
+    const selectedConsent = ref({});
+    const selectedConsentId = ref(null);
+    const actionLoading = ref(false);
 
     const fetchData = async () => {
       if (props.type) {
         emit("update:loading", true);
         try {
           consent.value = await getConsentsPayments();
-          errorMessage.value = ""; // Clear error message on successful fetch
+          errorMessage.value = "";
         } catch (error) {
           console.error("Erro ao carregar dados:", error.code);
-          if (error.code === "ERR_NETWORK") {
-            errorMessage.value =
-              "Não foi possível carregar os dados. Tente novamente mais tarde.";
-          } else {
-            errorMessage.value = "Não localizado ";
-          }
+          errorMessage.value =
+            error.code === "ERR_NETWORK"
+              ? "Não foi possível carregar os dados. Tente novamente mais tarde."
+              : "Não localizado.";
         } finally {
           emit("update:loading", false);
         }
       }
     };
 
-    const revokeConsent = async (consentId) => {
+    const viewConsent = (item) => {
+      selectedConsent.value = item;
+      isViewDialogOpen.value = true;
+    };
+
+    const alterConsent = (item) => {
+      selectedConsent.value = item;
+      isAlterDialogOpen.value = true;
+    };
+
+    const openConfirmDialog = (consentId) => {
+      selectedConsentId.value = consentId;
+      isConfirmDialogOpen.value = true;
+    };
+
+    const revokeConsent = async () => {
+      actionLoading.value = true;
       try {
-        await deleteConsentPayment(consentId); // Assumindo que essa função revoga o consentimento
-        await fetchData(); // Recarregar os dados após revogação
+        if (selectedConsentId.value) {
+          await deleteConsentPayment(selectedConsentId.value);
+          await fetchData();
+        }
       } catch (error) {
         console.error("Erro ao revogar consentimento:", error);
         errorMessage.value =
           "Erro ao revogar o consentimento. Tente novamente.";
-      }
-    };
-
-    const alterConsent = async (consentId) => {
-      try {
-        // Lógica para alterar o consentimento (por exemplo, abrir um modal)
-        await updateConsentPayment();
-        console.log("Alterar consentimento com ID:", consentId);
-      } catch (error) {
-        console.error("Erro ao alterar consentimento:", error);
-        errorMessage.value =
-          "Erro ao alterar o consentimento. Tente novamente.";
+      } finally {
+        actionLoading.value = false;
+        isConfirmDialogOpen.value = false;
       }
     };
 
@@ -115,26 +165,26 @@ export default {
       fetchData();
     });
 
-    watch(
-      () => props.loading,
-      (newVal) => {
-        loading.value = newVal;
-      }
-    );
-
     return {
       consent,
       errorMessage,
-      revokeConsent,
+      openConfirmDialog,
+      viewConsent,
       alterConsent,
+      revokeConsent,
+      isViewDialogOpen,
+      isAlterDialogOpen,
+      isConfirmDialogOpen,
+      selectedConsent,
+      actionLoading,
     };
   },
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .consent-details {
-  border: 1px solid #003b80;
+  border: 1px solid $quaternary;
   border-radius: 8px;
   max-width: 800px;
   margin: 0 auto;
@@ -148,12 +198,14 @@ export default {
 
 .small-text {
   font-size: 12px;
+  text-align: left;
+  display: block;
 }
 
-.amount-text {
+.text-stronger-value {
   font-size: 14px;
-  font-weight: bold;
-  color: #003b80;
+  text-align: left;
+  display: block;
 }
 
 .q-pa-xs {
@@ -167,9 +219,6 @@ export default {
 }
 
 .content-box {
-  border: 1px solid #003b80;
-  border-radius: 8px;
-  padding: 4px;
   margin-bottom: 6px;
   align-items: flex-start;
 }

@@ -1,6 +1,6 @@
-@import 'quasar.variables.scss'; // Certifique-se de que o caminho esteja correto
+@import "quasar.variables.scss"; // Certifique-se de que o caminho esteja correto
 
-body .q-page{
+body .q-page {
   background: linear-gradient(135deg, $accent, $tertiary, $secondary, $primary);
   color: $text-color;
   font-weight: bold;
@@ -17,14 +17,22 @@ body .q-page{
   text-align: center;
 }
 
+.content-box {
+  border: 1px solid $quaternary;
+  border-radius: 8px;
+  padding: 5px;
+  margin-bottom: 12px;
+}
+
 .text-title {
   color: $text-color;
   font-weight: bold;
   font-size: 14px;
 }
 
-.text-value {
-  color: $text-value;
+.text-stronger-value {
+  color: $quaternary;
+  font-weight: bold;
 }
 
 .error-message {

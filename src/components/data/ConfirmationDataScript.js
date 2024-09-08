@@ -1,5 +1,5 @@
 import { ref } from "vue";
-import RedirectModal from "src/components/RedirectModal.vue";
+import RedirectModal from "src/components/dialog/RedirectModal.vue";
 import { useCommonFunctions } from "src/composables/useCommonFunctions";
 import { useLoginStore } from "src/stores/loginStore";
 
@@ -9,10 +9,7 @@ export default {
     RedirectModal,
   },
   setup() {
-    const {
-      getDeviceInfo,
-      applyCPFMask,
-    } = useCommonFunctions();
+    const { getDeviceInfo, applyCPFMask } = useCommonFunctions();
 
     const loginStore = useLoginStore();
     const loginData = loginStore.loginData;

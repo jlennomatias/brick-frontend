@@ -10,17 +10,16 @@ export default route(function (/* { store, ssrContext } */) {
   });
 
   const isAuthenticated = () => {
-    return !!localStorage.getItem('authToken');
+    return !!localStorage.getItem("authToken");
   };
 
-  // Adiciona a guarda de rota global
   router.beforeEach((to, from, next) => {
     if (["/", "/login"].includes(to.path) && isAuthenticated()) {
-      next("/confirmation"); // Redireciona para /confirmation se o usuário estiver autenticado e acessar '/' ou '/login'
+      next("/consentsManagerPage");
     } else if (!isAuthenticated() && to.path !== "/login") {
-      next("/login"); // Redireciona para /login se o usuário não estiver autenticado e tentar acessar qualquer rota protegida
+      next("/login");
     } else {
-      next(); // Permite a navegação para outras rotas
+      next();
     }
   });
 

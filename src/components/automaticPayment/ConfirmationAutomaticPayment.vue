@@ -25,7 +25,7 @@
         >
       </div>
       <div class="row justify-center">
-        <span class="payment-amount">{{
+        <span class="payment-amount text-stronger-value">{{
           consentData.recurringConfiguration?.sweeping?.totalAllowedAmount ||
           consentData.recurringConfiguration?.automatic?.amount ||
           consentData.recurringConfiguration?.vrp?.transactionLimit
@@ -78,7 +78,7 @@
       <p>
         Para concluir o pagamento, lhe redirecionaremos devolta para a
         instituição
-        <span class="stronger-1"
+        <span class="text-stronger-value"
           >{{ consentData.organizationName }}
           <img :src="consentData.organizationLogo" alt="Logo" class="logo-img"
         /></span>
@@ -90,17 +90,6 @@
 <script src="./ConfirmationAutomaticPaymentScript.js"></script>
 
 <style scoped>
-.stronger-1 {
-  font-weight: bold;
-  color: #003b80;
-}
-
-.content-box {
-  border: 1px solid #003b80;
-  border-radius: 8px;
-  padding: 5px;
-  margin-bottom: 12px;
-}
 
 .open-finance-message {
   margin-top: 16px;
@@ -108,8 +97,6 @@
 }
 
 .payment-amount {
-  color: #003b80;
-  font-weight: bold;
   font-size: 24px;
 }
 

@@ -1,7 +1,7 @@
 import ConfirmationPayment from "src/components/payment/ConfirmationPayment.vue";
 import ConfirmationAutomaticPayment from "src/components/automaticPayment/ConfirmationAutomaticPayment.vue";
 import ConfirmationData from "src/components/data/ConfirmationData.vue";
-import RedirectModal from "src/components/RedirectModal.vue";
+import RedirectModal from "src/components/dialog/RedirectModal.vue";
 import {
   holderApproveConsent,
   holderCancelConsent,
