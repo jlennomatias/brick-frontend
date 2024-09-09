@@ -1,6 +1,7 @@
 import { route } from "quasar/wrappers";
 import { createRouter, createWebHistory } from "vue-router";
 import routes from "./routes";
+import { checkAuthToken } from "src/services/auth/authService";
 
 export default route(function (/* { store, ssrContext } */) {
   const router = createRouter({

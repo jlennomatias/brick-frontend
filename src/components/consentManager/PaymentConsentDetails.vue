@@ -13,34 +13,40 @@
         >
           <div class="col margin-box">
             <div class="row">
-              <span class="small-text text-left"
-                >Nome: {{ item.creditor.name }}</span
+              <span
+                class="small-text text-left"
+                :class="{
+                  'text-positive': ['AUTHORISED','CONSUMED'].includes(item.status),
+                  'text-negative': ['REJECTED'].includes(item.status),
+                  'text-warning': item.status === 'AWAITING_AUTHORISATION',
+                }"
+                >Status: {{ item.status }}</span
               >
             </div>
             <div class="row">
               <span class="small-text text-left"
-                >Data: {{ item.payment.date }}</span
-              >
-            </div>
-            <div class="row amount-row">
-              <span class="text-stronger-value text-left"
-                >Valor: R$
-                {{ parseFloat(item.payment.amount).toFixed(2) }}</span
+                >{{ item.organizationName }}</span
               >
             </div>
           </div>
-          <div class="col-auto self-center margin-box button-group">
-            <q-btn
-              @click="viewConsent(item)"
-              color="primary"
-              icon="visibility"
-              size="xs"
-              flat
-              dense
-            />
+          <div class="col-auto margin-box button-group">
+            <div class="row items-start justify-end">
+              <span class="small-text text-date">
+                {{ applyDateFormat(item.creationDateTime) }}</span
+              >
+            </div>
+            <div class="row justify-center">
+              <q-btn
+                @click="viewConsent(item)"
+                color="primary"
+                icon="visibility"
+                size="xs"
+                flat
+                dense
+              />
 
-            <!-- Desabilitado para detentora de conta -->
-            <!-- <q-btn
+              <!-- Desabilitado para detentora de conta -->
+              <!-- <q-btn
               @click="alterConsent(item)"
               color="primary"
               icon="edit"
@@ -49,14 +55,15 @@
               dense
             /> -->
 
-            <q-btn
-              @click="openConfirmDialog(item.consentId)"
-              color="negative"
-              icon="delete"
-              size="xs"
-              flat
-              dense
-            />
+              <q-btn
+                @click="openConfirmDialog(item.consentId)"
+                color="negative"
+                icon="delete"
+                size="xs"
+                flat
+                dense
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -116,6 +123,9 @@ export default {
         emit("update:loading", true);
         try {
           consent.value = await getConsentsPayments();
+          if (consent.value[0].kind !== "PAYMENT") {
+            throw "Não localizado."
+          }
           errorMessage.value = "";
         } catch (error) {
           console.error("Erro ao carregar dados:", error.code);
@@ -127,6 +137,10 @@ export default {
           emit("update:loading", false);
         }
       }
+    };
+
+    const applyDateFormat = (date) => {
+      return new Date(date).toISOString().slice(0, 16).replace("T", " ");
     };
 
     const viewConsent = (item) => {
@@ -168,6 +182,7 @@ export default {
     return {
       consent,
       errorMessage,
+      applyDateFormat,
       openConfirmDialog,
       viewConsent,
       alterConsent,
@@ -209,12 +224,12 @@ export default {
 }
 
 .q-pa-xs {
-  padding: 8px;
+  padding: 4px;
 }
 
 .button-group {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   gap: 4px;
 }
 
@@ -224,6 +239,12 @@ export default {
 }
 
 .margin-box {
-  margin: 0 9px;
+  margin: 0 2px;
 }
+
+.text-date {
+  text-align: right;
+  color: $text-value;
+}
+
 </style>

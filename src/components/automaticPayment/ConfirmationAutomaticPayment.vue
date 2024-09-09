@@ -10,25 +10,26 @@
       <div>
         <label>Data de vencimento do consentimento:</label>
         <span class="row justify-center">
-          {{ applyDateFormat(consentData.expirationDateTime) }}</span
+          {{ applyDateFormat(consentData.consent.expirationDateTime) }}</span
         >
       </div>
       <div class="row justify-center">
-        <label v-if="consentData.recurringConfiguration?.automatic"
+        <label v-if="consentData.consent.recurringConfiguration?.automatic"
           >Valor à pagar:</label
         >
-        <label v-if="consentData.recurringConfiguration?.sweeping"
+        <label v-if="consentData.consent.recurringConfiguration?.sweeping"
           >Valor total de transações:</label
         >
-        <label v-if="consentData.recurringConfiguration?.vrp"
+        <label v-if="consentData.consent.recurringConfiguration?.vrp"
           >Limite máximo para transação:</label
         >
       </div>
       <div class="row justify-center">
         <span class="payment-amount text-stronger-value">{{
-          consentData.recurringConfiguration?.sweeping?.totalAllowedAmount ||
-          consentData.recurringConfiguration?.automatic?.amount ||
-          consentData.recurringConfiguration?.vrp?.transactionLimit
+          consentData.consent.recurringConfiguration?.sweeping
+            ?.totalAllowedAmount ||
+          consentData.consent.recurringConfiguration?.automatic?.amount ||
+          consentData.consent.recurringConfiguration?.vrp?.transactionLimit
         }}</span>
       </div>
     </div>
@@ -36,7 +37,7 @@
       Dados do recebedor
     </q-item-label>
     <div
-      v-for="(creditor, index) in consentData.creditors"
+      v-for="(creditor, index) in consentData.consent.creditors"
       :key="index"
       class="content-box"
     >
@@ -49,48 +50,12 @@
         <span class="q-ml-sm">{{ applyCPFMask(creditor.cpfCnpj) }}</span>
       </div>
     </div>
-    <q-item-label class="confirmation-title text-title">
-      Fonte de pagamento
-    </q-item-label>
-    <div v-for="(conta, index) in contas" :key="index" class="content-box">
-      <div class="row justify-center">
-        <q-radio
-          :id="index"
-          class="checkbox-inline confirmation-radio"
-          v-model="selectedAccount"
-          :val="index"
-          size="24px"
-        />
-        <label class="" :for="index">{{
-          `Ag ${conta.branchCode} |
-                ${getAccountTypeLabel(conta.accountType).sigla}
-                ${conta.accountNumber}-${conta.checkDigit}`
-        }}</label>
-      </div>
-      <label class="row justify-center"
-        >Saldo em conta: R$ {{ conta.balance.toFixed(2) }}</label
-      >
-    </div>
-    <q-item-label class="confirmation-title text-title">
-      Forma de pagamento
-    </q-item-label>
-    <div class="open-finance-message">
-      <p>
-        Para concluir o pagamento, lhe redirecionaremos devolta para a
-        instituição
-        <span class="text-stronger-value"
-          >{{ consentData.organizationName }}
-          <img :src="consentData.organizationLogo" alt="Logo" class="logo-img"
-        /></span>
-      </p>
-    </div>
   </div>
 </template>
 
 <script src="./ConfirmationAutomaticPaymentScript.js"></script>
 
 <style scoped>
-
 .open-finance-message {
   margin-top: 16px;
   font-size: 14px;

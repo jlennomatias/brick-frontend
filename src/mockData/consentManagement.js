@@ -232,7 +232,7 @@ export const consentManageData = [
     idempotencyKey: "f81dfb66-8a41-4448-bfe6-aa9dda90ab25",
     version: 4,
     creationDateTime: "2024-08-22T12:46:20.278Z",
-    status: "REJECTED",
+    status: "AUTHORISED",
     statusUpdateDateTime: "2024-08-22T12:51:20.298Z",
     expirationDateTime: "2024-08-22T12:51:20.278Z",
     loggedUser: {
@@ -607,7 +607,7 @@ export const consentManageData = [
     idempotencyKey: "f6bf9871-d56b-37cb-b00a-2d81253973ee",
     version: 4,
     creationDateTime: "2024-08-22T12:33:16.305Z",
-    status: "REJECTED",
+    status: "CONSUMED",
     statusUpdateDateTime: "2024-08-22T12:38:16.329Z",
     expirationDateTime: "2024-08-22T12:38:16.305Z",
     loggedUser: {
@@ -637,4 +637,206 @@ export const consentManageData = [
     organizationName: "OTIMO SOCIEDADE DE CREDITO DIRETO S.A.",
     organizationLogo: "src/assets/img/f-icon.png",
   },
+
+
+
+
+  // {
+  //   journey: [],
+  //   creditors: [
+  //     {
+  //       personType: "PESSOA_NATURAL",
+  //       cpfCnpj: "99991111140",
+  //       name: "Joao Silva",
+  //     },
+  //   ],
+  //   startDateTime: "2024-04-15T18:38:44Z",
+  //   debtorAccount: {
+  //     ispb: "99999994",
+  //     issuer: "0001",
+  //     number: "12346578",
+  //     accountType: "TRAN",
+  //     ibgeTownCode: "3550308",
+  //   },
+  //   recurringConfiguration: {
+  //     sweeping: {
+  //       totalAllowedAmount: "600.00",
+  //     },
+  //   },
+  //   idempotencyKey: "fd9cf245-cabf-4c69-9aae-527f96b10d11",
+  //   creationDateTime: "2024-04-15T18:38:44.756Z",
+  //   status: "REVOKE",
+  //   statusUpdateDateTime: "2024-04-15T18:39:04.411Z",
+  //   expirationDateTime: "2024-10-12T18:38:44.000Z",
+  //   loggedUser: {
+  //     document: {
+  //       identification: "12345678909",
+  //       rel: "CPF",
+  //     },
+  //   },
+  //   kind: "AUTOMATIC_PAYMENT",
+  //   fapiInteractionId: "68e13d2a-f0d3-4027-83a0-3d4b48701b76",
+  //   applicantId: "50b67cd8-5f86-5f81-99b5-af83dae25c74",
+  //   applicantSoftwareId: "4be194d5-137c-45f3-bfc2-664edf9482b4",
+  //   transactions: [],
+  //   events: [
+  //     {
+  //       date: "2024-04-15T18:38:44.756Z",
+  //       event: "AWAITING_AUTHORISATION",
+  //     },
+  //     {
+  //       date: "2024-04-15T18:38:48.951Z",
+  //       event: "REDIRECTED",
+  //     },
+  //     {
+  //       date: "2024-04-15T18:39:04.411Z",
+  //       event: "AUTHORISED",
+  //     },
+  //     {
+  //       date: "2024-04-15T18:39:04.469Z",
+  //       event: "CODE_GENERATED",
+  //     },
+  //     {
+  //       date: "2024-04-15T18:39:07.842Z",
+  //       event: "TOKEN_GENERATED",
+  //     },
+  //   ],
+  //   recurringConsentId: "urn:iniciador:4b6fd7bd-8dd7-4793-bd92-1fe0ab720055",
+  //   consentTerm: 5,
+  //   consentTermUnit: "M",
+  //   organizationName: "Iniciador Certificação FAPI 1",
+  //   organizationLogo: "https://iniciador-logo.png",
+  // },
+  // {
+  //   journey: [],
+  //   creditors: [
+  //     {
+  //       personType: "PESSOA_NATURAL",
+  //       cpfCnpj: "99991111140",
+  //       name: "Joao Silva",
+  //     },
+  //   ],
+  //   startDateTime: "2024-04-15T18:38:44Z",
+  //   debtorAccount: {
+  //     ispb: "99999994",
+  //     issuer: "0001",
+  //     number: "12346578",
+  //     accountType: "TRAN",
+  //     ibgeTownCode: "3550308",
+  //   },
+  //   recurringConfiguration: {
+  //     sweeping: {
+  //       totalAllowedAmount: "600.00",
+  //     },
+  //   },
+  //   idempotencyKey: "fd9cf245-cabf-4c69-9aae-527f96b10d11",
+  //   creationDateTime: "2024-04-15T18:38:44.756Z",
+  //   status: "AWAITING_AUTHORISATION",
+  //   statusUpdateDateTime: "2024-04-15T18:39:04.411Z",
+  //   expirationDateTime: "2024-10-12T18:38:44.000Z",
+  //   loggedUser: {
+  //     document: {
+  //       identification: "12345678909",
+  //       rel: "CPF",
+  //     },
+  //   },
+  //   kind: "AUTOMATIC_PAYMENT",
+  //   fapiInteractionId: "68e13d2a-f0d3-4027-83a0-3d4b48701b76",
+  //   applicantId: "50b67cd8-5f86-5f81-99b5-af83dae25c74",
+  //   applicantSoftwareId: "4be194d5-137c-45f3-bfc2-664edf9482b4",
+  //   transactions: [],
+  //   events: [
+  //     {
+  //       date: "2024-04-15T18:38:44.756Z",
+  //       event: "AWAITING_AUTHORISATION",
+  //     },
+  //     {
+  //       date: "2024-04-15T18:38:48.951Z",
+  //       event: "REDIRECTED",
+  //     },
+  //     {
+  //       date: "2024-04-15T18:39:04.411Z",
+  //       event: "AUTHORISED",
+  //     },
+  //     {
+  //       date: "2024-04-15T18:39:04.469Z",
+  //       event: "CODE_GENERATED",
+  //     },
+  //     {
+  //       date: "2024-04-15T18:39:07.842Z",
+  //       event: "TOKEN_GENERATED",
+  //     },
+  //   ],
+  //   recurringConsentId: "urn:iniciador:4b6fd7bd-8dd7-4793-bd92-1fe0ab720055",
+  //   consentTerm: 5,
+  //   consentTermUnit: "M",
+  //   organizationName: "Iniciador Certificação FAPI 1",
+  //   organizationLogo: "https://iniciador-logo.png",
+  // },
+  // {
+  //   journey: [],
+  //   creditors: [
+  //     {
+  //       personType: "PESSOA_NATURAL",
+  //       cpfCnpj: "99991111140",
+  //       name: "Joao Silva",
+  //     },
+  //   ],
+  //   startDateTime: "2024-04-15T18:38:44Z",
+  //   debtorAccount: {
+  //     ispb: "99999994",
+  //     issuer: "0001",
+  //     number: "12346578",
+  //     accountType: "TRAN",
+  //     ibgeTownCode: "3550308",
+  //   },
+  //   recurringConfiguration: {
+  //     sweeping: {
+  //       totalAllowedAmount: "600.00",
+  //     },
+  //   },
+  //   idempotencyKey: "fd9cf245-cabf-4c69-9aae-527f96b10d11",
+  //   creationDateTime: "2024-04-15T18:38:44.756Z",
+  //   status: "CONSUMED",
+  //   statusUpdateDateTime: "2024-04-15T18:39:04.411Z",
+  //   expirationDateTime: "2024-10-12T18:38:44.000Z",
+  //   loggedUser: {
+  //     document: {
+  //       identification: "12345678909",
+  //       rel: "CPF",
+  //     },
+  //   },
+  //   kind: "AUTOMATIC_PAYMENT",
+  //   fapiInteractionId: "68e13d2a-f0d3-4027-83a0-3d4b48701b76",
+  //   applicantId: "50b67cd8-5f86-5f81-99b5-af83dae25c74",
+  //   applicantSoftwareId: "4be194d5-137c-45f3-bfc2-664edf9482b4",
+  //   transactions: [],
+  //   events: [
+  //     {
+  //       date: "2024-04-15T18:38:44.756Z",
+  //       event: "AWAITING_AUTHORISATION",
+  //     },
+  //     {
+  //       date: "2024-04-15T18:38:48.951Z",
+  //       event: "REDIRECTED",
+  //     },
+  //     {
+  //       date: "2024-04-15T18:39:04.411Z",
+  //       event: "AUTHORISED",
+  //     },
+  //     {
+  //       date: "2024-04-15T18:39:04.469Z",
+  //       event: "CODE_GENERATED",
+  //     },
+  //     {
+  //       date: "2024-04-15T18:39:07.842Z",
+  //       event: "TOKEN_GENERATED",
+  //     },
+  //   ],
+  //   recurringConsentId: "urn:iniciador:4b6fd7bd-8dd7-4793-bd92-1fe0ab720055",
+  //   consentTerm: 5,
+  //   consentTermUnit: "M",
+  //   organizationName: "Iniciador Certificação FAPI 1",
+  //   organizationLogo: "https://iniciador-logo.png",
+  // },
 ];

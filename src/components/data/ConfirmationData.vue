@@ -49,48 +49,12 @@
         <span class="q-ml-sm">{{ applyCPFMask(creditor.cpfCnpj) }}</span>
       </div>
     </div>
-    <q-item-label class="confirmation-title text-title">
-      Fonte de pagamento
-    </q-item-label>
-    <div v-for="(conta, index) in contas" :key="index" class="content-box">
-      <div class="row justify-center">
-        <q-radio
-          :id="index"
-          class="checkbox-inline confirmation-radio"
-          v-model="selectedAccount"
-          :val="index"
-          size="24px"
-        />
-        <label class="" :for="index">{{
-          `Ag ${conta.branchCode} |
-                ${getAccountTypeLabel(conta.accountType).sigla}
-                ${conta.accountNumber}-${conta.checkDigit}`
-        }}</label>
-      </div>
-      <label class="row justify-center"
-        >Saldo em conta: R$ {{ conta.balance.toFixed(2) }}</label
-      >
-    </div>
-    <q-item-label class="confirmation-title text-title">
-      Forma de pagamento
-    </q-item-label>
-    <div class="open-finance-message">
-      <p>
-        Para concluir o pagamento, lhe redirecionaremos devolta para a
-        instituição
-        <span class="text-stronger-value"
-          >{{ consentData.organizationName }}
-          <img :src="consentData.organizationLogo" alt="Logo" class="logo-img"
-        /></span>
-      </p>
-    </div>
   </div>
 </template>
 
 <script src="./ConfirmationDataScript.js"></script>
 
 <style scoped>
-
 .open-finance-message {
   margin-top: 16px;
   font-size: 14px;

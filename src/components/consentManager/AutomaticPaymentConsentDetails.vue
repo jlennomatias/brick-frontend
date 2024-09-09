@@ -13,42 +13,57 @@
         >
           <div class="col margin-box">
             <div class="row">
-              <span class="small-text text-left">Nome: {{ item.creditor.name }}</span>
+              <span
+                class="small-text text-left"
+                :class="{
+                  'text-positive': ['AUTHORISED','CONSUMED'].includes(item.status),
+                  'text-negative': item.status === 'REVOKE',
+                  'text-warning': item.status === 'AWAITING_AUTHORISATION',
+                }"
+                >Status: {{ item.status }}</span
+              >
             </div>
             <div class="row">
-              <span class="small-text text-left">Data: {{ item.payment.date }}</span>
-            </div>
-            <div class="row amount-row">
-              <span class="text-stronger-value text-left"
-                >Valor: R$ {{ parseFloat(item.payment.amount).toFixed(2) }}</span
+              <span class="small-text text-left"
+                >{{ item.organizationName }}</span
               >
             </div>
           </div>
-          <div class="col-auto self-center margin-box button-group">
-            <q-btn
-              @click="viewConsent(item)"
-              color="primary"
-              icon="visibility"
-              size="xs"
-              flat
-              dense
-            />
-            <q-btn
+          <div class="col-auto margin-box button-group">
+            <div class="row items-start justify-end">
+              <span class="small-text text-date">
+                {{ applyDateFormat(item.creationDateTime) }}</span
+              >
+            </div>
+            <div class="row justify-center">
+              <q-btn
+                @click="viewConsent(item)"
+                color="primary"
+                icon="visibility"
+                size="xs"
+                flat
+                dense
+              />
+
+              <!-- Desabilitado para detentora de conta -->
+              <!-- <q-btn
               @click="alterConsent(item)"
               color="primary"
               icon="edit"
               size="xs"
               flat
               dense
-            />
-            <q-btn
-              @click="openConfirmDialog(item.consentId)"
-              color="negative"
-              icon="delete"
-              size="xs"
-              flat
-              dense
-            />
+            /> -->
+
+              <q-btn
+                @click="openConfirmDialog(item.recurringConsentId)"
+                color="negative"
+                icon="delete"
+                size="xs"
+                flat
+                dense
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -77,9 +92,9 @@
 <script>
 import { ref, onMounted } from "vue";
 import {
-  getConsentsPayments,
-  deleteConsentPayment,
-} from "src/services/gestaoConsents/apiGestaoConsentimentoPaymentService.js";
+  deleteConsentAutomaticPayment,
+  getConsentsAutomaticPayments,
+} from "src/services/gestaoConsents/apiGestaoConsentimentoAutomaticPaymentService";
 import ViewConsentDialog from "src/components/dialog/ViewConsentDialog.vue";
 import AlterConsentDialog from "src/components/dialog/AlterConsentDialog.vue";
 import RevokeConsentDialog from "src/components/dialog/RevokeConsentDialog.vue";
@@ -107,7 +122,10 @@ export default {
       if (props.type) {
         emit("update:loading", true);
         try {
-          consent.value = await getConsentsPayments();
+          consent.value = await getConsentsAutomaticPayments();
+          if (consent.value[0].kind !== "AUTOMATIC_PAYMENT") {
+            throw "Não localizado."
+          }
           errorMessage.value = "";
         } catch (error) {
           console.error("Erro ao carregar dados:", error.code);
@@ -119,6 +137,10 @@ export default {
           emit("update:loading", false);
         }
       }
+    };
+
+    const applyDateFormat = (date) => {
+      return new Date(date).toISOString().slice(0, 16).replace("T", " ");
     };
 
     const viewConsent = (item) => {
@@ -140,7 +162,7 @@ export default {
       actionLoading.value = true;
       try {
         if (selectedConsentId.value) {
-          await deleteConsentPayment(selectedConsentId.value);
+          await deleteConsentAutomaticPayment(selectedConsentId.value);
           await fetchData();
         }
       } catch (error) {
@@ -160,6 +182,7 @@ export default {
     return {
       consent,
       errorMessage,
+      applyDateFormat,
       openConfirmDialog,
       viewConsent,
       alterConsent,
@@ -196,17 +219,17 @@ export default {
 
 .text-stronger-value {
   font-size: 14px;
-  text-align: left; 
+  text-align: left;
   display: block;
 }
 
 .q-pa-xs {
-  padding: 8px;
+  padding: 4px;
 }
 
 .button-group {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   gap: 4px;
 }
 
@@ -216,6 +239,12 @@ export default {
 }
 
 .margin-box {
-  margin: 0 9px;
+  margin: 0 2px;
 }
+
+.text-date {
+  text-align: right;
+  color: $text-value;
+}
+
 </style>
