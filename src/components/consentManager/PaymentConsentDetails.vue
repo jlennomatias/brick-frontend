@@ -55,14 +55,14 @@
               dense
             /> -->
 
-              <q-btn
+              <!-- <q-btn
                 @click="openConfirmDialog(item.consentId)"
                 color="negative"
                 icon="delete"
                 size="xs"
                 flat
                 dense
-              />
+              /> -->
             </div>
           </div>
         </div>
