@@ -1,11 +1,8 @@
 import { api } from "src/boot/axios"; // Importe a instância personalizada do Axios
-import { consentManageData } from "src/mockData/consentManagement";
 
 // Função para buscar dados de todos os consentimentos do tipo automatic-payment
 export async function getConsentsAutomaticPayments(params) {
   try {
-
-    return consentManageData;
     const response = await api.get(`/api/management/consents/v1/consents/automatic-payment/transmitions`, params);
     return response.data;
   } catch (error) {
