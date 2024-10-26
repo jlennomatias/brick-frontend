@@ -16,9 +16,9 @@
               <span
                 class="small-text text-left"
                 :class="{
-                  'text-positive': ['AUTHORISED','CONSUMED'].includes(item.status),
-                  'text-negative': ['REJECTED'].includes(item.status),
-                  'text-warning': item.status === 'AWAITING_AUTHORISATION',
+                  'text-positive': ['AUTHORISED'].includes(item.status),
+                  'text-negative': ['REVOKED', 'REJECTED'].includes(item.status),
+                  'text-warning': ['AWAITING_AUTHORISATION'].includes(item.status),
                 }"
                 >Status: {{ item.status }}</span
               >
@@ -99,6 +99,16 @@ import ViewConsentDialog from "src/components/dialog/ViewConsentDialog.vue";
 import AlterConsentDialog from "src/components/dialog/AlterConsentDialog.vue";
 import RevokeConsentDialog from "src/components/dialog/RevokeConsentDialog.vue";
 
+// Define as opções de status em uma constante única
+const statusOptions = [
+  { label: "Todos", value: null },
+  { label: "Autorizado", value: "AUTHORISED" },
+  { label: "Revogado", value: "REVOKED" },
+  { label: "Rejeitado", value: "REJECTED" },
+  { label: "Consumido", value: "CONSUMED" },
+  { label: "Aguardando Autorização", value: "AWAITING_AUTHORISATION" }
+];
+
 export default {
   components: { ViewConsentDialog, AlterConsentDialog, RevokeConsentDialog },
   props: {
@@ -110,6 +120,7 @@ export default {
   },
   setup(props, { emit }) {
     const consent = ref([]);
+    const selectedStatus = ref(statusOptions[1].value); // "Autorizado" como valor padrão
     const errorMessage = ref("");
     const isViewDialogOpen = ref(false);
     const isAlterDialogOpen = ref(false);
@@ -118,24 +129,26 @@ export default {
     const selectedConsentId = ref(null);
     const actionLoading = ref(false);
 
+
+    // Função que busca os consentimentos com base no status selecionado
     const fetchData = async () => {
-      if (props.type) {
-        emit("update:loading", true);
-        try {
-          consent.value = await getConsentsPayments();
-          if (consent.value[0].kind !== "PAYMENT") {
-            throw "Não localizado."
-          }
-          errorMessage.value = "";
-        } catch (error) {
-          console.error("Erro ao carregar dados:", error.code);
-          errorMessage.value =
-            error.code === "ERR_NETWORK"
-              ? "Não foi possível carregar os dados. Tente novamente mais tarde."
-              : "Não localizado.";
-        } finally {
-          emit("update:loading", false);
+      emit("update:loading", true);
+      try {
+        // O valor de 'selectedStatus' já é uma string ("AUTHORISED", "REVOKED", etc.)
+        consent.value = await getConsentsPayments(selectedStatus.value);
+
+        if (!consent.value.length || consent.value[0].kind !== "PAYMENT") {
+          throw "Não localizado consentimentos.";
         }
+        errorMessage.value = "";
+      } catch (error) {
+        console.error("Erro ao carregar dados:", error);
+        errorMessage.value =
+          error.code === "ERR_NETWORK"
+            ? "Não foi possível carregar os dados. Tente novamente mais tarde."
+            : "Não localizado.";
+      } finally {
+        emit("update:loading", false);
       }
     };
 

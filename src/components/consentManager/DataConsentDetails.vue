@@ -16,9 +16,9 @@
               <span
                 class="small-text text-left"
                 :class="{
-                  'text-positive': ['AUTHORISED','CONSUMED'].includes(item.status),
-                  'text-negative': item.status === 'REVOKE',
-                  'text-warning': item.status === 'AWAITING_AUTHORISATION',
+                  'text-positive': ['AUTHORISED'].includes(item.status),
+                  'text-negative': ['REVOKED', 'REJECTED'].includes(item.status),
+                  'text-warning': ['AWAITING_AUTHORISATION'].includes(item.status),
                 }"
                 >Status: {{ item.status }}</span
               >
